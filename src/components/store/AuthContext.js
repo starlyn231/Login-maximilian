@@ -18,6 +18,8 @@ const userIsLoggedIn =!!token;
 
 const loginHandler=(token)=>{
   setToken(token);
+
+ 
 }
 
 const logoutHandler=()=>{

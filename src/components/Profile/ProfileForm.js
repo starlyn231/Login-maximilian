@@ -1,6 +1,11 @@
 import classes from './ProfileForm.module.css';
+import React,{useRef} from 'react'
 
 const ProfileForm = () => {
+  const newPasswordInpuRef = useRef();
+
+
+
   return (
     <form className={classes.form}>
       <div className={classes.control}>
