@@ -1,4 +1,5 @@
-import { useState,useRef} from 'react';
+import { useState,useRef, useContext} from 'react';
+import AuthContext from '../store/AuthContext';
 
 import classes from './AuthForm.module.css';
 
@@ -6,7 +7,8 @@ import classes from './AuthForm.module.css';
 const AuthForm = () => {
 
   const [isLogin, setIsLogin] = useState(true);
-const [loading, setLoading] =useState(false);
+const [isLoading, setLoaging] =useState(false);
+const authCtx = useContext(AuthContext);
 
   const emailInputRef  = useRef()
   const passwordInputRef  = useRef()
@@ -24,7 +26,7 @@ const [loading, setLoading] =useState(false);
 console.log(enteredEmail,enteredPassword)
     //optional aad validation
     
-    setLoading(true);
+    setIsLogin(true);
     let url;
     if(isLogin){
       url='https://sisboa.net/public/api/auth/login'
@@ -45,7 +47,7 @@ console.log(enteredEmail,enteredPassword)
         }
       }
       ).then(res=>{
-        setLoading(false)
+        setIsLogin(false)
         if(res.ok){
         
         return res.json();
@@ -64,7 +66,7 @@ console.log(enteredEmail,enteredPassword)
           });
         }
       }).then(data=>{
-        console.log(data);
+        authCtx.login(data.access_token)
       })
       .catch(err=>{
         alert(err.message);
@@ -87,7 +89,7 @@ fetch(url,{
   }
 }
 ).then(res=>{
-  setLoading(false)
+  setIsLogin(false)
   if(res.ok){
     console.log("dfatap")
     //...
@@ -129,8 +131,8 @@ fetch(url,{
           <input type='password' id='password' required  ref={passwordInputRef}/>
         </div>
         <div className={classes.actions}>
-          { !loading  && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
-          {loading && <p>Enviando solicitud...</p>}
+          { !isLoading  && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
+          {isLoading && <p>Enviando solicitud...</p>}
 
           <button
             type='button'
