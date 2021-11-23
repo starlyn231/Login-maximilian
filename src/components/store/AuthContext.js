@@ -32,7 +32,6 @@ const contextValue ={
 
 }
 
-
 return <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>
 
  }

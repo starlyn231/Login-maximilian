@@ -66,7 +66,8 @@ console.log(enteredEmail,enteredPassword)
           });
         }
       }).then(data=>{
-        authCtx.login(data.access_token)
+      console.log(data.access_token)
+        //  authCtx.login(data.access_token)
       })
       .catch(err=>{
         alert(err.message);
@@ -120,11 +121,11 @@ fetch(url,{
           <input type='email' id='email' required ref={emailInputRef} />
         </div>
         
-            { !isLogin  ?
+           
         <div className={classes.control}>
           <label htmlFor='name'>Your name</label>
           <input type='text' id='name'  ref={nameInputRef} />
-        </div> : ''}
+        </div> 
 
         <div className={classes.control}>
           <label htmlFor='password'>Your Password</label>
